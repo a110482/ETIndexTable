@@ -11,6 +11,8 @@ import UIKit
 open class ETIndexBinder {
     private let indexTableViewController: ETIndexTableViewController
     private let dataTableViewController: ETDataTableViewController
+    
+    
     public init(indexTableViewController: ETIndexTableViewController,
          dataTableViewController: ETDataTableViewController) {
         self.indexTableViewController = indexTableViewController
@@ -18,8 +20,13 @@ open class ETIndexBinder {
         self.indexTableViewController.etDelegate = self
         self.dataTableViewController.etDelegate = self
     }
+    
+    public func setup(config: ETIndexBinderConfig) {
+        setupPaging(config)
+    }
 }
 
+// MARK: - delegate
 extension ETIndexBinder: ETDataTableViewControllerDelegate {
     func selectRow(at indexPath: IndexPath) {
         indexTableViewController.tableView.selectRow(at: [indexPath.section,  0], animated: true, scrollPosition: .top)
@@ -38,5 +45,12 @@ extension ETIndexBinder: ETIndexTableViewControllerDelegate {
     func didSelectRowAt(indexPath: IndexPath) {
         dataTableViewController.stopUpdateIndex()
         dataTableViewController.tableView.scrollToRow(at: [indexPath.section, 0], at: .top, animated: true)
+    }
+}
+
+// MARK: - Config
+extension ETIndexBinder {
+    func setupPaging(_ config: ETIndexBinderConfig) {
+        dataTableViewController.pagingBehaver = config.pagingBehaver
     }
 }

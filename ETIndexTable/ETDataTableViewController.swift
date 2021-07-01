@@ -15,8 +15,7 @@ protocol ETDataTableViewControllerDelegate: AnyObject {
 }
 
 open class ETDataTableViewController: UITableViewController {
-    weak var etDelegate: ETDataTableViewControllerDelegate?
-    
+    // open
     open override func viewDidLoad() {
         super.viewDidLoad()
         DispatchQueue.main.async {
@@ -36,13 +35,20 @@ open class ETDataTableViewController: UITableViewController {
         etDelegate?.didEndScrollingAnimation()
     }
     
-    func updateIndex() {
-        guard needUpdateIndex else { return }
-        let cells = tableView.visibleCells
-        guard let firstCell = cells.min(by: { $0.center.y < $1.center.y }) else { return }
-        guard let indexPath = tableView.indexPath(for: firstCell) else { return }
-        etDelegate?.selectRow(at: indexPath)
+    open override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if !decelerate {
+            pagingAnimate()
+        }
     }
+    
+    open override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        pagingAnimate()
+    }
+    
+    // internal
+    weak var etDelegate: ETDataTableViewControllerDelegate?
+    
+    var pagingBehaver: PagingBehaver = .none
     
     func stopUpdateIndex() {
         needUpdateIndex = false
@@ -52,7 +58,38 @@ open class ETDataTableViewController: UITableViewController {
         needUpdateIndex = true
     }
     
+    // private
     private var needUpdateIndex = true
+    
+    private func updateIndex() {
+        guard needUpdateIndex else { return }
+        let cells = tableView.visibleCells
+        guard let firstCell = cells.min(by: { $0.center.y < $1.center.y }) else { return }
+        guard let indexPath = tableView.indexPath(for: firstCell) else { return }
+        etDelegate?.selectRow(at: indexPath)
+    }
+    
+    private func pagingAnimate() {
+        guard pagingBehaver != .none else { return }
+        let cells = tableView.visibleCells
+        guard cells.count > 1 else {
+            return
+        }
+        let offset = tableView.contentOffset.y
+        let criticalValue: CGFloat
+        switch pagingBehaver {
+        case .none:
+            criticalValue = 0
+        case .withCellTop:
+            criticalValue = cells[0].bounds.height
+        case .whthCellMedium:
+            criticalValue = cells[0].bounds.height/2
+        }
+        
+        let scrollTopCell = (offset - cells[0].frame.origin.y) < criticalValue ? cells[0] : cells[1]
+        guard let index = tableView.indexPath(for: scrollTopCell) else { return }
+        tableView.scrollToRow(at: index, at: .top, animated: true)
+    }
 }
 
 

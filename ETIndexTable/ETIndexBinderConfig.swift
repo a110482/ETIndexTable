@@ -10,7 +10,7 @@ import Foundation
 public enum PagingBehaver {
     case none
     case withCellTop
-    case whthCellMedium
+    case withCellMedium
 }
 
 public struct ETIndexBinderConfig {

@@ -82,7 +82,7 @@ open class ETDataTableViewController: UITableViewController {
             criticalValue = 0
         case .withCellTop:
             criticalValue = cells[0].bounds.height
-        case .whthCellMedium:
+        case .withCellMedium:
             criticalValue = cells[0].bounds.height/2
         }
         

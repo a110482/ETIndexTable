@@ -10,6 +10,7 @@
 		CF0629DA2687AB1B008CF7D0 /* ETIndexTable.h in Headers */ = {isa = PBXBuildFile; fileRef = CF0629CC2687AB1B008CF7D0 /* ETIndexTable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CF266045268C0CD20063509B /* ETIndexTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF266044268C0CD20063509B /* ETIndexTableViewController.swift */; };
 		CF266047268C0D0E0063509B /* ETIndexBinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF266046268C0D0E0063509B /* ETIndexBinder.swift */; };
+		CF4817B9268D93AD007903D7 /* ETIndexBinderConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4817B8268D93AD007903D7 /* ETIndexBinderConfig.swift */; };
 		CFAF9B44268B026F00F8C5BF /* ETDataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAF9B43268B026F00F8C5BF /* ETDataTableViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -19,6 +20,7 @@
 		CF0629CD2687AB1B008CF7D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CF266044268C0CD20063509B /* ETIndexTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETIndexTableViewController.swift; sourceTree = "<group>"; };
 		CF266046268C0D0E0063509B /* ETIndexBinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETIndexBinder.swift; sourceTree = "<group>"; };
+		CF4817B8268D93AD007903D7 /* ETIndexBinderConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETIndexBinderConfig.swift; sourceTree = "<group>"; };
 		CFAF9B43268B026F00F8C5BF /* ETDataTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ETDataTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -55,6 +57,7 @@
 				CFAF9B43268B026F00F8C5BF /* ETDataTableViewController.swift */,
 				CF266044268C0CD20063509B /* ETIndexTableViewController.swift */,
 				CF266046268C0D0E0063509B /* ETIndexBinder.swift */,
+				CF4817B8268D93AD007903D7 /* ETIndexBinderConfig.swift */,
 				CF0629CC2687AB1B008CF7D0 /* ETIndexTable.h */,
 				CF0629CD2687AB1B008CF7D0 /* Info.plist */,
 			);
@@ -144,6 +147,7 @@
 				CF266047268C0D0E0063509B /* ETIndexBinder.swift in Sources */,
 				CF266045268C0CD20063509B /* ETIndexTableViewController.swift in Sources */,
 				CFAF9B44268B026F00F8C5BF /* ETDataTableViewController.swift in Sources */,
+				CF4817B9268D93AD007903D7 /* ETIndexBinderConfig.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

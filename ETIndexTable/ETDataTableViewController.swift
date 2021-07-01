@@ -68,13 +68,39 @@ open class ETDataTableViewController: UITableViewController {
         guard let indexPath = tableView.indexPath(for: firstCell) else { return }
         etDelegate?.selectRow(at: indexPath)
     }
-    
+}
+
+// Paging
+extension ETDataTableViewController {
     private func pagingAnimate() {
         guard pagingBehaver != .none else { return }
         let cells = tableView.visibleCells
-        guard cells.count > 1 else {
-            return
+        if cells.count == 0 {
+            scrollToLastCell()
+        } else if cells.count == 1 {
+            scrollToFirstVisibleCell()
+        } else {
+            scrollToNearbyCell()
         }
+        
+        
+    }
+    
+    private func scrollToFirstVisibleCell() {
+        let cells = tableView.visibleCells
+        guard cells.count > 0 else { return }
+        guard let index = tableView.indexPath(for: cells[0]) else { return }
+        tableView.scrollToRow(at: index, at: .top, animated: true)
+    }
+    
+    private func scrollToLastCell() {
+        let lastSection = numberOfSections(in: tableView) - 1
+        let lastRow = tableView(tableView, numberOfRowsInSection: lastSection) - 1
+        tableView.scrollToRow(at: [lastSection, lastRow], at: .top, animated: true)
+    }
+    
+    private func scrollToNearbyCell() {
+        let cells = tableView.visibleCells
         let offset = tableView.contentOffset.y
         let criticalValue: CGFloat
         switch pagingBehaver {
@@ -91,5 +117,3 @@ open class ETDataTableViewController: UITableViewController {
         tableView.scrollToRow(at: index, at: .top, animated: true)
     }
 }
-
-
